@@ -14,7 +14,7 @@ fi
 echo -n "$VERSION" > $VERSION_FILE && \
     git add $VERSION_FILE && \
     if [[ -f package.json ]] && type npm > /dev/null 2>&1; then \
-    npm version --no-git-tag-version "$VERSION" && git add package.json; fi && \
+    npm version --no-git-tag-version --allow-same-version "$VERSION" && git add package.json; fi && \
     git commit -m "$(echo "$VERSION_BUMP_MESSAGE" | sed s/%version%/$VERSION/g)"
 
 if [ $? -ne 0 ]; then
