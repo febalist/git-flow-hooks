@@ -13,7 +13,7 @@ fi
 
 echo -n "$VERSION" > $VERSION_FILE && \
     git add $VERSION_FILE && \
-    if [[ -f package.json ]] && ! grep -q '"private": true' package.json && type npm > /dev/null 2>&1; then \
+    if [[ -f package.json ]] && grep -q '"version":' package.json && type npm > /dev/null 2>&1; then \
     npm version --no-git-tag-version --allow-same-version "$VERSION" && git add -A; fi && \
     git commit -m "$(echo "$VERSION_BUMP_MESSAGE" | sed s/%version%/$VERSION/g)"
 
